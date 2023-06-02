@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/ennvironments/environment'
+
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +20,7 @@ export class ProductDetailsComponent implements OnInit {
     console.log("The product ID is ", productId)
 
 
-    this.http.get("http://localhost:4500/products/" + productId). subscribe(productData => {
+    this.http.get(environment.server + "/products/" + productId). subscribe(productData => {
       console.log("Product Data:", productData  )
     })
   }

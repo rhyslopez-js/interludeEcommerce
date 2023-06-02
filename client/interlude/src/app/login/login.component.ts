@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/ennvironments/environment'
+
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,7 @@ export class LoginComponent {
 
   login(){
     console.log(this.email, this.password);
-    this.http.post("http://localhost:4600/validateuser", { email: this.email, password: this.password} ).subscribe( res => {
+    this.http.post("http://environment.server" + "/validateuser", { email: this.email, password: this.password} ).subscribe( res => {
 
     if(res){
       this.router.navigate(['/admin']);

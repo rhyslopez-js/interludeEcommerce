@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../interfaces/product.interface';
+import { environment } from 'src/ennvironments/environment'
+
 
 @Component({
   selector: 'app-product-update',
@@ -29,7 +31,7 @@ export class ProductUpdateComponent implements OnInit {
     let id = this.activatedroute.snapshot.paramMap.get("id")
 
 
-    this.http.put("http://localhost:4600/products/" + id, { id: this.id, image: this.image, title: this.title, description: this.description, price: this.price, inStock: this.inStock} ).subscribe( res => {
+    this.http.put(environment.server + "/products/" + id, { id: this.id, image: this.image, title: this.title, description: this.description, price: this.price, inStock: this.inStock} ).subscribe( res => {
 
     if(res){
       console.log(this.title, this.description, this.image, this.price, this.inStock)
@@ -46,7 +48,7 @@ export class ProductUpdateComponent implements OnInit {
     let id = this.activatedroute.snapshot.paramMap.get("id")
 
           
-    this.http.delete("http://localhost:4600/products/" + id).subscribe(res =>{
+    this.http.delete(environment.server + "/products/" + id).subscribe(res =>{
       if(res){
         this.router.navigate(['/admin']);
         alert("The product has been deleted")
@@ -60,7 +62,7 @@ export class ProductUpdateComponent implements OnInit {
   ngOnInit(): void {
     let id = this.activatedroute.snapshot.paramMap.get("id")
 
-    this.http.get<any>("http://localhost:4600/products/" + id).subscribe(response =>{
+    this.http.get<any>(environment.server + "/products/" + id).subscribe(response =>{
       console.log(response)
       this.modifyProduct = response
 

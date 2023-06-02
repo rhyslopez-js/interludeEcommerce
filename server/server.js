@@ -1,12 +1,13 @@
 import express from 'express'
 import mysql from 'mysql'
 import cors from 'cors'
+import 'dotenv/config'
 
 
 const server = express();
 server.use(express.json());
 server.use(cors());
-const port = 4600;
+const port = process.env.NODEPORT
 
 server.listen(port, function(){
     console.log('Server started and running on port no', port);
@@ -16,11 +17,11 @@ server.listen(port, function(){
 // Creating the connection to the database
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    port: 8889,
-    user: 'root',
-    password: 'root',
-    database: 'interlude'
+    host: process.env.DBSERVER,
+    port: process.env.DBPORT,
+    user: process.env.DBUSER,
+    password: process.env.DBPASSWORD,
+    database: process.env.DB,
 })
 
 db.connect(function(error){

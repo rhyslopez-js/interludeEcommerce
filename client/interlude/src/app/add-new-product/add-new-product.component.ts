@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { environment } from 'src/ennvironments/environment'
 
 
 
@@ -24,7 +25,7 @@ export class AddNewProductComponent {
 
 
   addNewProduct(){
-    this.http.post("http://localhost:4600/products", { image: this.image, title: this.title, description: this.description, price: this.price, inStock: this.inStock, displayProduct: this.displayProduct} ).subscribe( res => {
+    this.http.post(environment.server + "/products", { image: this.image, title: this.title, description: this.description, price: this.price, inStock: this.inStock, displayProduct: this.displayProduct} ).subscribe( res => {
 
     if(res){
       alert("product has beenn added")

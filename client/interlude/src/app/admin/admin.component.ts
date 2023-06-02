@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Product } from '../interfaces/product.interface';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/ennvironments/environment'
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +20,7 @@ export class AdminComponent {
   }
 
   ngOnInit(): void {
-    this.http.get<Product>("http://localhost:4600/products").subscribe(response =>{
+    this.http.get<Product>(environment.server + "/products").subscribe(response =>{
         console.log(response.productData)
       this.productsAPI = response.productData
       // this.displayProduct = response.productData[0].displayProduct
@@ -34,7 +35,7 @@ export class AdminComponent {
       return;
     }
   
-    this.http.delete("http://localhost:4600/products/" + productId).subscribe(
+    this.http.delete("http://environment.server" + "/products/" + productId).subscribe(
       res => {
         if (res) {
           localStorage.setItem('message', 'Deleted product successfully');
